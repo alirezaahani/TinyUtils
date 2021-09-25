@@ -52,7 +52,7 @@ int utils_variance(int arr[], int n)
 }
 
 // compare function for qsort
-int utils_compare(const void * a, const void * b)
+static int utils_compare(const void * a, const void * b)
 {
     return ( *(int*)a - *(int*)b );
 }
