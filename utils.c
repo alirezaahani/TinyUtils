@@ -1,5 +1,9 @@
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+#include "utils.h"
 
 char* utils_strin()
 {
@@ -88,4 +92,31 @@ int utils_frequent(int arr[], int n)
     }
 
     return popular;
+}
+
+
+bool* utils_sieve_prime(uint64_t n)
+{
+    bool *is_prime = malloc(sizeof(bool) * n);
+
+    is_prime[0] = false;
+    is_prime[1] = false;
+
+    for(uint64_t i = 2; i < n; i++)
+    {
+        is_prime[i] = true;
+    }
+
+    for(uint64_t i = 2; i < n; i++)
+    {
+        if(is_prime[i])
+        {
+            for(uint64_t j = 2 * i; j < n; j += i)
+            {
+                is_prime[j] = false;
+            }
+        }
+    }
+
+    return is_prime;
 }
