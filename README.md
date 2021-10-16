@@ -11,4 +11,4 @@ Returns variance of an int array.
 Returns most frequent item in an array.     
 
 `bool* utils_sieve_prime(uint64_t n)`     
-Prime sieve algorithm, returns an array on heap, index of the array indicates the number is prime or not.     
+Prime sieve algorithm, returns an array on heap, index of the array indicates the number is prime or not, free after using it.     
