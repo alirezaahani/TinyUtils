@@ -1,4 +1,4 @@
-# tiny-c-utils
+# Tiny C utils
 Utils for C
 
 `char* utils_strin()`   
