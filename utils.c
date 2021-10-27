@@ -120,3 +120,22 @@ bool* utils_sieve_prime(uint64_t n)
 
     return is_prime;
 }
+
+bool utils_is_prime(uint64_t n)
+{
+    if(n < 2)
+        return false;
+
+    int i = 2;
+
+    while(i * i < x)
+    {
+        if(x % i == 0)
+        {
+            return false;
+        }
+        i++;
+    }
+
+    return true;
+}
