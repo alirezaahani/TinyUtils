@@ -2,6 +2,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <wchar.h>
+#include <fcntl.h>
+#include <io.h>
 
 #include "utils.h"
 
@@ -34,6 +37,35 @@ char *utils_strin()
 
     return str_buffer;
 }
+
+
+wchar_t *utils_wstrin()
+{
+    _setmode(_fileno(stdin), _O_U16TEXT);
+
+    size_t i = 0, n = 0;
+    wint_t ch = 0;
+
+    wchar_t *str_buffer = calloc(sizeof(wchar_t), WEOF);
+
+    do
+    {
+        ch = getwchar();
+        if (i == n)
+        {
+            n += 16;
+            if ((str_buffer = realloc(str_buffer, sizeof(wchar_t) * n)) == NULL)
+            {
+                abort();
+            }
+        }
+        str_buffer[i++] = ch;
+    } while (ch != WEOF && ch != L'\n');
+    str_buffer[i - 1] = WEOF;
+
+    return str_buffer;
+}
+
 
 int utils_variance(int arr[], int n)
 {
