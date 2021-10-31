@@ -14,4 +14,8 @@ Returns most frequent item in an array.
 Prime sieve algorithm, returns an array on heap, index of the array indicates the number is prime or not, free after using it.     
 
 `bool utils_is_prime(uint64_t n)`     
-Checks number is prime or not, an O(sqrt(n)) is used.
+Checks number is prime or not, an O(sqrt(n)) is used.     
+
+`wchar_t* utils_wstrin();`         
+Wide character version of `utils_strin`.    
+Warning: Only tested for English, Arabic scripts.    
