@@ -38,7 +38,6 @@ char *utils_strin()
     return str_buffer;
 }
 
-
 wchar_t *utils_wstrin()
 {
     _setmode(_fileno(stdin), _O_U16TEXT);
@@ -46,7 +45,7 @@ wchar_t *utils_wstrin()
     size_t i = 0, n = 0;
     wint_t ch = 0;
 
-    wchar_t *str_buffer = calloc(sizeof(wchar_t), WEOF);
+    wchar_t *str_buffer = calloc(sizeof(wchar_t), '\0');
 
     do
     {
@@ -60,12 +59,11 @@ wchar_t *utils_wstrin()
             }
         }
         str_buffer[i++] = ch;
-    } while (ch != WEOF && ch != L'\n');
-    str_buffer[i - 1] = WEOF;
+    } while (ch != '\0' && ch != L'\n');
+    str_buffer[i - 1] = '\0';
 
     return str_buffer;
 }
-
 
 int utils_variance(int arr[], int n)
 {
