@@ -12,14 +12,14 @@
 #include <io.h>
 #endif // TINY_UTILS_UNICODE
 
-char* utils_strin();
+char *utils_strin();
 int utils_variance(int arr[], int n);
 int utils_frequent(int arr[], int n);
-bool* utils_sieve_prime(uint64_t n);
+bool *utils_sieve_prime(uint64_t n);
 bool utils_is_prime(uint64_t n);
 
 #ifdef TINY_UTILS_UNICODE
-wchar_t* utils_wstrin();
+wchar_t *utils_wstrin();
 #endif //TINY_UTILS_UNICODE
 
 #endif // UTILS_H_INCLUDED
@@ -68,6 +68,7 @@ wchar_t *utils_wstrin()
             n += 16;
             if ((str_buffer = realloc(str_buffer, sizeof(wchar_t) * n)) == NULL)
             {
+                fprintf(stderr, "Realloc failed\n");
                 abort();
             }
         }
