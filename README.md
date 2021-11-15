@@ -1,5 +1,6 @@
 # Tiny C utils
-Utils for C
+Utils for C     
+Define `TINY_UTILS_IMPLEMENTATION` in a file where you want the function bodys to be copied.    
 
 `char* utils_strin()`   
 Reads input without skipping space and stops if `EOF` or `\n` are passed, grows the buffer in 16 char chunks if needed, return a pointer to memory in heap, free after using it.   
@@ -18,4 +19,5 @@ Checks number is prime or not, an O(sqrt(n)) is used.
 
 `wchar_t* utils_wstrin();`         
 Wide character version of `utils_strin`.    
+Define `TINY_UTILS_UNICODE` before using.      
 Warning: Only tested for English, Arabic scripts.    
