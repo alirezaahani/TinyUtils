@@ -21,3 +21,10 @@ Checks number is prime or not, an O(sqrt(n)) is used.
 Wide character version of `utils_strin`.    
 Define `TINY_UTILS_UNICODE` before using.      
 Warning: Only tested for English, Arabic scripts.    
+
+`utils_bit_is_set(x, n)`    
+`utils_bit_set(x, n)`    
+`utils_bit_reset(x, n)`     
+`utils_bit_toggle(x, n)`      
+
+Bit bit manipulation **macros**, **they do not modify the original value of `x`**, the `n` argument specifies the bit to get manipulated, the `x` arguments specifies the data.   
