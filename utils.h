@@ -18,7 +18,7 @@ int utils_frequent(int arr[], int n);
 bool *utils_sieve_prime(uint64_t n);
 bool utils_is_prime(uint64_t n);
 
-#define utils_bit_is_set(x, n) ((x << n) & 1)
+#define utils_bit_is_set(x, n) (x & (1 << n))
 #define utils_bit_set(x, n) (x | (1 << n))
 #define utils_bit_reset(x, n) (x & (~(1 << n)))
 #define utils_bit_toggle(x, n) (x ^ (1 << n))
