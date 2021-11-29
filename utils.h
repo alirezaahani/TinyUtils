@@ -36,7 +36,7 @@ char *utils_strin()
 {
     size_t i = 0, n = 0;
     int ch = 0;
-    char *str_buffer = calloc(sizeof(char), '\0');
+    char *str_buffer = calloc(1, sizeof(char));
 
     do
     {
@@ -64,7 +64,7 @@ wchar_t *utils_wstrin()
     size_t i = 0, n = 0;
     wint_t ch = 0;
 
-    wchar_t *str_buffer = calloc(sizeof(wchar_t), '\0');
+    wchar_t *str_buffer = calloc(1, sizeof(wchar_t));
 
     do
     {
