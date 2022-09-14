@@ -1,90 +1,52 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
-#include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#ifdef TINY_UTILS_UNICODE
-#include <wchar.h>
-#include <fcntl.h>
-#include <io.h>
-#endif // TINY_UTILS_UNICODE
-
-char *utils_strin();
+char *utils_strin(void);
 int utils_variance(int arr[], int n);
 int utils_frequent(int arr[], int n);
 bool *utils_sieve_prime(uint64_t n);
 bool utils_is_prime(uint64_t n);
 
-// Macros for bit hacks
-#define utils_bit_is_set(x, n) (x & (1 << n))
-#define utils_bit_set(x, n) (x | (1 << n))
-#define utils_bit_reset(x, n) (x & (~(1 << n)))
-#define utils_bit_toggle(x, n) (x ^ (1 << n))
-
-#ifdef TINY_UTILS_UNICODE
-wchar_t *utils_wstrin();
-#endif //TINY_UTILS_UNICODE
-
+// Macros for bit manipilations
+#define bit_chk(x, n) (x & (1 << n))
+#define bit_set(x, n) (x | (1 << n))
+#define bit_res(x, n) (x & (~(1 << n)))
+#define bit_xor(x, n) (x ^ (1 << n))
 #endif // UTILS_H_INCLUDED
 
 #ifdef TINY_UTILS_IMPLEMENTATION
-
-char *utils_strin()
+char *utils_strin(void)
 {
-    size_t i = 0, n = 0;
+    size_t i = 0, n = 1;
     int ch = 0;
-    char *str_buffer = calloc(1, sizeof(char));
+    char *buffer = calloc(1, sizeof(char));
 
     do
     {
         ch = getchar();
+        
         if (i == n)
         {
-            n += 16;
-            if ((str_buffer = realloc(str_buffer, sizeof(char) * n)) == NULL)
+            n *= 2;
+            if ((buffer = realloc(buffer, sizeof(char) * n)) == NULL)
             {
-                fprintf(stderr, "Realloc failed\n");
-                abort();
+                perror("realloc");
+                exit(EXIT_FAILURE);
             }
         }
-        str_buffer[i++] = ch;
+
+        buffer[i++] = ch;
     } while (ch != '\n' && ch != EOF);
-    str_buffer[i - 1] = '\0';
-    return str_buffer;
+    
+    buffer[i - 1] = '\0';
+    
+    return buffer;
 }
-
-#ifdef TINY_UTILS_UNICODE
-wchar_t *utils_wstrin()
-{
-    _setmode(_fileno(stdin), _O_U16TEXT);
-
-    size_t i = 0, n = 0;
-    wint_t ch = 0;
-
-    wchar_t *str_buffer = calloc(1, sizeof(wchar_t));
-
-    do
-    {
-        ch = getwchar();
-        if (i == n)
-        {
-            n += 16;
-            if ((str_buffer = realloc(str_buffer, sizeof(wchar_t) * n)) == NULL)
-            {
-                fprintf(stderr, "Realloc failed\n");
-                abort();
-            }
-        }
-        str_buffer[i++] = ch;
-    } while (ch != '\0' && ch != L'\n');
-    str_buffer[i - 1] = '\0';
-
-    return str_buffer;
-}
-#endif //TINY_UTILS_UNICODE
 
 int utils_variance(int arr[], int n)
 {
@@ -174,9 +136,11 @@ bool *utils_sieve_prime(uint64_t n)
 bool utils_is_prime(uint64_t n)
 {
     if (n < 2)
+    {
         return false;
+    }
 
-    int i = 2;
+    uint64_t i = 2;
 
     while (i * i < n)
     {
